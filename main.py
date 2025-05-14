@@ -13,6 +13,11 @@ def main():
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     player = Player(x, y, PLAYER_RADIUS)
 
     while True:
@@ -24,8 +29,10 @@ def main():
 
         screen.fill((0, 0, 0))
 
-        player.draw(screen)
-        player.update(dt)
+        updatable.update(dt)
+
+        for draw in drawable:
+            draw.draw(screen)
 
         pygame.display.flip()
 
